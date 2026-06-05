@@ -153,7 +153,6 @@ export default function App() {
     "online",
     "organizer_name",
     "organizer_position",
-    "observations",
   ];
 
   const validate = () => {
@@ -223,7 +222,7 @@ export default function App() {
       online: form["online"],
       organizer_name: form.organizer_name,
       organizer_position: form.organizer_position,
-      observations: form.observations,
+      observations: form.observations && form.observations.trim() ? form.observations : " ",
     };
 
     try {
@@ -269,7 +268,8 @@ export default function App() {
           background: "white",
           borderRadius: 16,
           padding: "40px 44px",
-          boxShadow: "0 10px 30px rgba(0, 101, 189, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02)",
+          boxShadow:
+            "0 10px 30px rgba(0, 101, 189, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02)",
           borderTop: `6px solid ${PRIMARY}`,
         }}
       >
@@ -547,7 +547,7 @@ export default function App() {
         {/* ── Observações ── */}
         <div style={sectionTitleStyle}>Observações</div>
         <label style={labelStyle}>
-          Observações adicionais *
+          Observações adicionais
           <textarea
             name="observations"
             value={form.observations}
@@ -555,15 +555,12 @@ export default function App() {
             rows={3}
             placeholder="Informações adicionais relevantes..."
             style={{
-              ...inputStyle(errors.observations),
+              ...inputStyle(false),
               resize: "vertical",
               lineHeight: 1.5,
             }}
             className="premium-input"
           />
-          {errors.observations && (
-            <span style={errorMsgStyle}>Campo obrigatório</span>
-          )}
         </label>
 
         {/* ── Botão ── */}
@@ -585,7 +582,8 @@ export default function App() {
           }}
           onMouseOver={(e) => {
             e.currentTarget.style.background = "#00529B";
-            e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 101, 189, 0.3)";
+            e.currentTarget.style.boxShadow =
+              "0 4px 12px rgba(0, 101, 189, 0.3)";
           }}
           onMouseOut={(e) => {
             e.currentTarget.style.background = PRIMARY;
