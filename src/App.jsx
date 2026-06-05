@@ -131,6 +131,8 @@ export default function App() {
     level: "",
     hours: "",
     online: "",
+    organizer_name: "",
+    organizer_position: "",
     observations: "",
   });
 
@@ -149,6 +151,8 @@ export default function App() {
     "level",
     "hours",
     "online",
+    "organizer_name",
+    "organizer_position",
     "observations",
   ];
 
@@ -217,6 +221,8 @@ export default function App() {
       end_year: ed.year,
       hours: form.hours,
       online: form["online"],
+      organizer_name: form.organizer_name,
+      organizer_position: form.organizer_position,
       observations: form.observations,
     };
 
@@ -517,6 +523,25 @@ export default function App() {
               <span style={errorMsgStyle}>Campo obrigatório</span>
             )}
           </label>
+        </div>
+
+        {/* ── Responsável pela Organização ── */}
+        <div style={sectionTitleStyle}>Responsável pela Organização</div>
+        <div
+          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}
+        >
+          <Field
+            label="Nome do responsável *"
+            name="organizer_name"
+            placeholder="Ex: Prof. Doutor João Silva"
+            {...fieldProps}
+          />
+          <Field
+            label="Cargo / Função *"
+            name="organizer_position"
+            placeholder="Ex: Coordenador de Curso"
+            {...fieldProps}
+          />
         </div>
 
         {/* ── Observações ── */}
