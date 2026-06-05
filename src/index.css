@@ -3,5 +3,16 @@
 @tailwind utilities;
 
 body {
-  background-color: #f7f7f9;
+  background-color: #F4F7FB;
 }
+
+/* Premium input focus and transition states */
+.premium-input {
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
+}
+
+.premium-input:focus {
+  border-color: #0065BD !important;
+  box-shadow: 0 0 0 3px rgba(0, 101, 189, 0.15) !important;
+}
+

@@ -3,9 +3,9 @@ import PizZip from "pizzip";
 import Docxtemplater from "docxtemplater";
 import { saveAs } from "file-saver";
 
-const PRIMARY = "#732043";
-const SECONDARY = "#052533";
-const LIGHT_BG = "#f7f7f9";
+const PRIMARY = "#0065BD";
+const SECONDARY = "#0F172A";
+const LIGHT_BG = "#F4F7FB";
 
 const toDateStr = (d) => d.toISOString().split("T")[0];
 const splitDate = (val) => {
@@ -107,6 +107,7 @@ function Field({
         onChange={onChange}
         placeholder={placeholder}
         style={inputStyle(errors[name])}
+        className="premium-input"
       />
       {errors[name] && <span style={errorMsgStyle}>Campo obrigatório</span>}
     </label>
@@ -248,7 +249,7 @@ export default function App() {
     <div
       style={{
         minHeight: "100vh",
-        background: LIGHT_BG,
+        background: `linear-gradient(135deg, ${LIGHT_BG} 0%, #EBF5FF 100%)`,
         display: "flex",
         justifyContent: "center",
         padding: "40px 20px",
@@ -262,7 +263,8 @@ export default function App() {
           background: "white",
           borderRadius: 16,
           padding: "40px 44px",
-          boxShadow: "0 8px 40px rgba(0,0,0,0.09)",
+          boxShadow: "0 10px 30px rgba(0, 101, 189, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02)",
+          borderTop: `6px solid ${PRIMARY}`,
         }}
       >
         {/* Header */}
@@ -333,6 +335,7 @@ export default function App() {
               resize: "vertical",
               lineHeight: 1.5,
             }}
+            className="premium-input"
           />
           {errors.desciption && (
             <span style={errorMsgStyle}>Campo obrigatório</span>
@@ -390,6 +393,12 @@ export default function App() {
                   background: sel ? PRIMARY + "0f" : "white",
                   transition: "all 0.15s",
                 }}
+                onMouseOver={(e) => {
+                  if (!sel) e.currentTarget.style.borderColor = PRIMARY + "80";
+                }}
+                onMouseOut={(e) => {
+                  if (!sel) e.currentTarget.style.borderColor = "#d0d0d8";
+                }}
               >
                 <span
                   style={{
@@ -446,6 +455,7 @@ export default function App() {
                   setErrors((p) => ({ ...p, endDate: false }));
               }}
               style={inputStyle(!!errors.startDate)}
+              className="premium-input"
             />
             {errors.startDate && (
               <span style={errorMsgStyle}>
@@ -466,6 +476,7 @@ export default function App() {
                   setErrors((p) => ({ ...p, endDate: false }));
               }}
               style={inputStyle(!!errors.endDate)}
+              className="premium-input"
             />
             {errors.endDate && (
               <span style={errorMsgStyle}>
@@ -493,6 +504,7 @@ export default function App() {
               value={form["online"]}
               onChange={handleChange}
               style={{ ...inputStyle(errors.online), appearance: "auto" }}
+              className="premium-input"
             >
               <option value="">Selecione...</option>
               <option value="(presencial)">(presencial)</option>
@@ -522,6 +534,7 @@ export default function App() {
               resize: "vertical",
               lineHeight: 1.5,
             }}
+            className="premium-input"
           />
           {errors.observations && (
             <span style={errorMsgStyle}>Campo obrigatório</span>
@@ -543,10 +556,22 @@ export default function App() {
             fontWeight: 700,
             cursor: "pointer",
             letterSpacing: 0.3,
-            transition: "background 0.2s",
+            transition: "all 0.2s ease-in-out",
           }}
-          onMouseOver={(e) => (e.currentTarget.style.background = SECONDARY)}
-          onMouseOut={(e) => (e.currentTarget.style.background = PRIMARY)}
+          onMouseOver={(e) => {
+            e.currentTarget.style.background = "#00529B";
+            e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 101, 189, 0.3)";
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.background = PRIMARY;
+            e.currentTarget.style.boxShadow = "none";
+          }}
+          onMouseDown={(e) => {
+            e.currentTarget.style.transform = "scale(0.985)";
+          }}
+          onMouseUp={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+          }}
         >
           Gerar Certificado
         </button>
